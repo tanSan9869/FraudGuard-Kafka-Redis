@@ -1,0 +1,123 @@
+# =============================================
+#  Java / Spring Boot / Maven
+# =============================================
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+
+# Maven wrapper (jar only — keep scripts)
+.mvn/wrapper/maven-wrapper.jar
+
+# =============================================
+#  Python / ML Service
+# =============================================
+ml-service/.venv/
+ml-service/__pycache__/
+ml-service/app/__pycache__/
+ml-service/tests/__pycache__/
+ml-service/training/__pycache__/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+*.pyo
+
+# =============================================
+#  IDE — IntelliJ IDEA
+# =============================================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# =============================================
+#  IDE — Eclipse / STS
+# =============================================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+bin/
+
+# =============================================
+#  IDE — VS Code
+# =============================================
+.vscode/
+
+# =============================================
+#  IDE — NetBeans
+# =============================================
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/nb-configuration.xml
+
+# =============================================
+#  OS Generated
+# =============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.Trash-*
+
+# =============================================
+#  Docker
+# =============================================
+docker-compose.override.yml
+
+# =============================================
+#  Environment & Secrets
+# =============================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# =============================================
+#  Node.js (benchmark scripts)
+# =============================================
+node_modules/
+package*.json
+fraudguard*.md
+mvnw
+mvnw.cmd
+HELP.md
+pyrightconfig.json
+
+# =============================================
+#  Misc
+# =============================================
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig

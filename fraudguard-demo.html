@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FraudGuard — Transaction Console</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="eyebrow-row"><span class="dot" id="pulse"></span><span class="eyebrow">FRAUDGUARD / TRANSACTION
+          CONSOLE</span></div>
+      <h1>Submit a transaction, watch it get scored.</h1>
+      <div class="sub">Sends a request straight to your FraudGuard API, then polls until the async pipeline — Kafka, the
+        ML scoring service, and Postgres — settles on a final verdict.</div>
+
+      <div class="config">
+        <label for="apiBase">API base</label>
+        <input id="apiBase" type="text" value="http://localhost:8080" spellcheck="false">
+      </div>
+    </header>
+
+    <div class="grid">
+
+      <div class="panel">
+        <h2>New transaction</h2>
+        <form id="txForm">
+          <div class="field">
+            <label for="accountId">Account ID</label>
+            <input id="accountId" type="text" value="acc-demo-01" required>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="amount">Amount</label>
+              <input id="amount" type="number" step="0.01" value="249.99" required>
+            </div>
+            <div class="field">
+              <label for="currency">Currency</label>
+              <input id="currency" type="text" value="USD" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="merchant">Merchant</label>
+            <input id="merchant" type="text" value="Amazon" required>
+          </div>
+          <div class="field">
+            <label for="transactionType">Transaction type</label>
+            <select id="transactionType">
+              <option value="PURCHASE">Purchase</option>
+              <option value="WITHDRAWAL">Withdrawal</option>
+              <option value="TRANSFER">Transfer</option>
+              <option value="REFUND">Refund</option>
+            </select>
+          </div>
+          <button class="submit" type="submit" id="submitBtn">Submit transaction</button>
+          <div class="error-box" id="errorBox"></div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h2>Pipeline</h2>
+        <div id="emptyState" class="empty-state">Submit a transaction to watch it move through the pipeline in real
+          time.</div>
+        <div class="steps" id="steps" style="display:none;">
+          <div class="step" data-step="submitted">
+            <div class="step-line"></div>
+            <div class="step-marker">1</div>
+            <div class="step-body">
+              <div class="step-title">Submitted</div>
+              <div class="step-detail" id="detail-submitted">—</div>
+            </div>
+          </div>
+          <div class="step" data-step="queued">
+            <div class="step-line"></div>
+            <div class="step-marker">2</div>
+            <div class="step-body">
+              <div class="step-title">Queued on Kafka</div>
+              <div class="step-detail" id="detail-queued">—</div>
+            </div>
+          </div>
+          <div class="step" data-step="scored">
+            <div class="step-line"></div>
+            <div class="step-marker">3</div>
+            <div class="step-body">
+              <div class="step-title">Scored by ML service</div>
+              <div class="step-detail" id="detail-scored">—</div>
+            </div>
+          </div>
+          <div class="step" data-step="final">
+            <div class="step-marker">4</div>
+            <div class="step-body">
+              <div class="step-title">Final verdict</div>
+              <div class="step-detail" id="detail-final">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card" id="resultCard">
+          <span class="result-status" id="resultStatus"></span>
+          <div class="result-meta">
+            <div class="meta-item">
+              <div class="k">Transaction ID</div>
+              <div class="v" id="metaId">—</div>
+            </div>
+            <div class="meta-item">
+              <div class="k">Anomaly score</div>
+              <div class="v" id="metaScore">—</div>
+            </div>
+            <div class="meta-item">
+              <div class="k">Model version</div>
+              <div class="v" id="metaModel">—</div>
+            </div>
+            <div class="meta-item">
+              <div class="k">Time to verdict</div>
+              <div class="v" id="metaTime">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>Open this page from the API itself: <code>http://localhost:8080/fraudguard-demo.html</code>. Opening the file directly in the browser often blocks API calls.</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
